@@ -1,10 +1,4 @@
-/*
- * This class is to find subarray of size 'k' within a given input array of size 'n'.
- * Brute force will give O(n^2) with nested for loops.
- * Here trying to do it in O(n)
- * 
- * */
-import java.util.*;
+package jack.algos.Arrays;
 
 public class SubarrayWithLeastAvrg {
 	static int[] in = {3, 7, 5, 20, -10, 0, 12};

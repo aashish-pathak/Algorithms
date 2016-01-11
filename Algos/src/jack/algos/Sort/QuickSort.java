@@ -1,4 +1,4 @@
-import java.util.*;
+package jack.algos.Sort;
 
 public class QuickSort {
 	static int[] in = {3,7,8,5,2,1,9,5,4};
