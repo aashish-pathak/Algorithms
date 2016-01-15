@@ -9,7 +9,6 @@
  * */
 
 package jack.algos.Arrays;
-import sun.misc.Sort;
 import jack.algos.Sort.*;
 
 public class PairEqualsToGivenSum {
@@ -18,19 +17,45 @@ public class PairEqualsToGivenSum {
 		int sum = 14;
 		// sort the input array in ascending order
 		in = QuickSort.sort(in, 0, in.length-1);
-		getPairs(in, sum);
+		int total = getPairs(in, sum);
+		System.out.println("There are total " + total + " pairs in the given array.");
+		total = getPairsV1(in, sum, 0);
+		System.out.println("There are total " + total + " pairs in the given array.");
 	}
 	
-	public static void getPairs(int[] in, int sum) {
-		int i=0, j=in.length-1;
+	/* Sum exact equal to given sum */
+	public static int getPairs(int[] in, int sum) {
+		int i=0, j=in.length-1, total=0;
 		while (i<j) {
-			if (in[i] + in[j] == sum) {
+			if ((in[i] + in[j]) == sum) {
+				total++;
 				System.out.println("(" + in[i] + ", " + in[j] + ")");
 				i++; j--;
-			} else if (in[i] + in[j] < sum)
+			} else if ((in[i] + in[j]) < sum) 
 				i++;
-			else
-				j++;
+			else 
+				j--;
 		}
+		return total;
+	}
+	
+	/* Sum less than or equal to given sum 
+	 * 'start' variable is intentionally introduced to to find the count from 
+	 * a subarray in the given array starting from position 'start'.
+	 * This particular scenario was required for some other problem.
+	 * Ref: TripletsWithSumSmallerThanGivenVal.java
+	 * In normal case we can pass start as 0.
+	 * */
+	public static int getPairsV1(int[] in, int sum, int start) {
+		int i=start, j=in.length-1, total=0;
+		while (i<j) {
+			if ((in[i] + in[j]) < sum) {
+				total = total + (j-i);
+				i++;
+			}	
+			else 
+				j--;
+		}
+		return total;
 	}
 }
