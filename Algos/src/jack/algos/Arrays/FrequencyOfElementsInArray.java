@@ -32,11 +32,13 @@ public class FrequencyOfElementsInArray {
 		int n = in.length;
 		for (int j =0; j < n; j++)
 	        in[j] = in[j]-1;
+		//in: {1,2,2,1,4}
 		
 		for(int i=0; i<n; i++) {
 			int element = in[i];
 			in[element%n] = in[element%n] + n;
 		}
+		//in: {1,12, 12,1, 9}
 		for(int i=0; i<n; i++) {
 			System.out.println((i+1) + "---> " + in[i]/n);
 		}
