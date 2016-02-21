@@ -1,0 +1,14 @@
+Tree Facts
+
+If there are 'n' number of nodes in complete binary tree, then the height of the tree = log n
+Log is taken to the base of 2
+e.g., n = 5, height = 2
+      n = 13, height = 3
+      
+If the height of the tree is nm then there are maximum 2^(n+1) - 1 nodes in the tree
+
+If binary tree is stored in array representation (BFS or level wise), starting from index 1 to n then:
+child of element at index n is at : (2*n) and (2*n + 1)  
+
+
+
