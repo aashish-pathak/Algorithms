@@ -6,7 +6,6 @@ public class FindElementInRotatedArray {
 	public static void main(String[] args) {
 		int in[] = { 2,6,8,9,15,20,18,16,12,7,1};
 		int num = 12;
-		Binary b = new Binary();
 		//get the highest element in the array
 		//This will be the point where array can be divided into 2 subarrays
 		//O(logn) can be then used to find num in these 2 subarrays

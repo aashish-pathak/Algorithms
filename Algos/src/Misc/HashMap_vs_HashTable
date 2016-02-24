@@ -1,0 +1,189 @@
+HashMap vs HashTable
+
+1.The HashMap class is roughly equivalent to Hashtable, except that it is non synchronized and permits nulls. 
+  HashMap allows one null values as key and value whereas, 
+  Hashtable doesn't allow nulls.
+
+  Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html
+  
+2. One of the major differences between HashMap and Hashtable is that 
+   HashMap is non synchronized whereas,
+   Hashtable is synchronized. 
+   It means Hashtable is thread-safe and can be shared between multiple threads but,
+   HashMap can not be shared between multiple threads without proper synchronization. 
+   
+   Java 5 introduces ConcurrentHashMap which is an alternative of Hashtable and 
+   provides better scalability than Hashtable in Java.
+   
+   Synchronized means only one Thread can modify a hash table at one point of time. 
+   Basically, it means that any thread before performing an update on a Hashtable 
+   will have to acquire a lock on the object while others will wait for lock to be released.
+		Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html#ixzz40y2Rza8T
+   
+   Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html#ixzz40y1GhG3z
+   
+   
+   Map m = Collections.synchronizeMap(hashMap);
+   
+
+3. Another significant difference between HashMap vs Hashtable is that 
+   Iterator in the HashMap is  a fail-fast iterator  while,
+   the enumerator for the Hashtable is not and throw ConcurrentModificationException
+    if any other Thread modifies the map structurally  by adding or removing any element 
+    except Iterator's own remove() method. 
+   But this is not a guaranteed behavior and will be done by JVM on best effort. 
+   This is also an important difference between Enumeration and Iterator in Java.
+   
+4. One more notable difference between Hashtable and HashMap is that 
+   because of thread-safety and synchronization Hashtable is much slower than HashMap if used in Single threaded environment. 
+   So if you don't need synchronization and HashMap is only used by one thread, it out perform Hashtable in Java.
+   
+5. HashMap does not guarantee that the order of the map will remain constant over time.
+
+Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html#ixzz40y2H6pK3
+Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html#ixzz40y25oA3R
+Read more: http://javarevisited.blogspot.com/2010/10/difference-between-hashmap-and.html#ixzz40y1llLQb
+
+================================================================================================================================
+================================================================================================================================
+
+HOW HASHMAP WORKS:
+
+HashMap in Java works on hashing principle. It is a data structure which allows us to store object and 
+retrieve it in constant time O(1) provided we know the key. 
+In hashing, hash functions are used to link key and value in HashMap. 
+Objects are stored by calling put(key, value) method of HashMap and retrieved by calling get(key) method. 
+When we call put method, hashcode() method of the key object is called so that 
+	hash function of the map can find a bucket location to store value object, 
+	which is actually an index of the internal array, known as the table. 
+HashMap internally stores mapping in the form of Map.
+Entry object which contains both key and value object. 
+When you want to retrieve the object, you call the get() method and again pass the key object. 
+This time again key object generate same hash code 
+	(it's mandatory for it to do so to retrieve the object and that's why HashMap keys are immutable e.g. String)
+ 	and we end up at same bucket location. 
+ If there is only one object then it is returned and that's your value object which you have stored earlier.
+ 
+ Things get little tricky when collisions occur. 
+ Since the internal array of HashMap is of fixed size, and if you keep storing objects, 
+ at some point of time hash function will return same bucket location for two different keys, this is called collision in HashMap. 
+ In this case, a linked list is formed at that bucket location and a new entry is stored as next node.
+
+If we try to retrieve an object from this linked list, we need an extra check to search correct value, 
+this is done by equals() method. 
+Since each node contains an entry, HashMap keeps comparing entry's key object with the passed key using equals() 
+and when it return true, Map returns the corresponding value.
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40y7kJI00
+ 
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40y6vnDT7
+ 
+================================================================================================================================
+================================================================================================================================
+  
+Q.Have you used HashMap before or  What is HashMap? Why do you use it 
+-Almost everybody answers this with yes and then interviewee keep talking about common facts about HashMap like 
+HashMap accept null while Hashtable doesn't, HashMap is not synchronized, HashMap is fast and so on along with basics like 
+its stores key and value pairs etc. 
+This shows that person has used HashMap and quite familiar with the functionality it offers, 
+but interview takes a sharp turn from here and next set of follow-up questions gets more detailed 
+about fundamentals involved with HashMap in Java. Interviewer strike back with questions like:
+
+Q.Do you Know how HashMap works in Java or How does get () method of HashMap works in Java
+-And then you get answers like,  I don't bother its standard Java API, you better look code on Java source or Open JDK; 
+I can find it out in Google at any time etc. But some interviewee definitely answers this and will say HashMap works 
+on the principle of hashing, we have put(key, value) and get(key) method for storing and retrieving Objects from HashMap.
+When we pass Key and Value object  to put() method on Java HashMap, 
+	HashMap implementation calls hashCode method on Key object and applies returned hashcode into its own hashing function 
+	to find a bucket location for storing Entry object, 
+	important point to mention is that HashMap in Java stores both key and value object as Map.Entry in a bucket 
+		which is essential to understand the retrieving logic. 
+
+If people fail to recognize this and say it only stores Value in the bucket they will fail to explain the retrieving logic 
+	of any object stored in Java HashMap. This answer is very much acceptable and does make sense that interviewee 
+		has a fair bit of knowledge on how hashing works and how HashMap  works in Java. 
+		But this is just start of story and confusion increases when you put interviewee on scenarios faced by Java developers 
+			on day by day basis. Next question could be about collision detection and collision resolution in Java HashMap  e.g. 
+
+Q.What will happen if two different objects have the same hashcode?
+-Now from here onwards real confusion starts, sometime candidate will say that since hashcode is equal, 
+	both objects are equal and HashMap  will throw exception or not store them again etc, T
+	hen you might want to remind them about equals() and hashCode() contract that two unequal objects in Java can have same hashcode. 
+	Some will give up at this point and few will move ahead and say 
+	
+	"Since hashcode is same, bucket location would be same and collision will occur in HashMap 
+	Since HashMap uses LinkedList to store object, this entry (object of Map.Entry comprise key and value )  
+	will be stored in LinkedList. Great this answer make sense though there are many collision resolution methods available  
+	like linear probing and chaining, this is simplest and HashMap in Java does follow this. 
+	But story does not end here and interviewer asks
+	
+Q.  How will you retrieve Value object  if two Keys will have the same hashcode?
+- Interviewee will say we will call get() method and then HashMap uses Key Object's hashcode to find out 
+  bucket location and retrieves Value object but then you need to remind him that 
+  there are two Value objects are stored in same bucket, so they will say about traversal in LinkedList until 
+  we find the value object , then you ask how do you identify value object because you don't  have value object to compare ,
+  Until they know that HashMap  stores both Key and Value in LinkedList node or as Map.Entry they won't be able to resolve this issue 
+  and will try and fail.
+
+
+	But those bunch of people who remember this key information will say that after finding bucket location, 
+	we will call keys.equals() method to identify a correct node in LinkedList and return associated value object for that key 
+	in Java HashMap. Perfect this is the correct answer.
+
+
+In many cases interviewee fails at this stage because they get confused between hashCode() and equals() or keys and values 
+	object in Java HashMap  which is pretty obvious because they are dealing with the hashcode() 
+	in all previous questions and equals() come in picture only in case of retrieving value object from HashMap in Java. 
+	Some good developer point out here that using immutable, final object with proper equals() and hashcode() 
+	implementation would act as perfect Java HashMap  keys and improve the performance of Java HashMap  by reducing collision. 
+	Immutability also allows caching their hashcode of different keys which makes overall retrieval process very fast 
+	and suggest that String and various wrapper classes e.g. Integer very good keys in Java HashMap.
+
+Q. What happens On HashMap in Java if the size of the HashMap  exceeds a given threshold defined by load factor ?". 
+- Until you know how HashMap  works exactly you won't be able to answer this question. 
+	If the size of the Map exceeds a given threshold defined by load-factor e.g. if the load factor is .75 
+		it will act to re-size the map once it filled 75%. 
+		Similar to other collection classes like ArrayList,  Java HashMap re-size itself 
+		by creating a new bucket array of size twice of the previous size of HashMap and 
+		then start putting every old element into that new bucket array. 
+		This process is called rehashing because it also applies the hash function to find new bucket location. 
+
+		If you manage to answer this question on HashMap in Java you will be greeted by 
+Q. "do you see any problem with resizing of HashMap  in Java" , 
+-	you might not be able to pick the context and then he will try to give you hint about 
+	multiple thread accessing the Java HashMap and potentially looking for race condition on HashMap  in Java. 
+
+	So the answer is Yes there is potential race condition exists while resizing HashMap in Java, 
+		if two thread at the same time found that now HashMap needs resizing and they both try to resizing. 
+		on the process of resizing of HashMap in Java, the element in the bucket which is stored in linked list 
+		get reversed in order during their migration to new bucket because Java HashMap  doesn't append the new element 
+		at tail instead it append new element at the head to avoid tail traversing. 
+		If race condition happens then you will end up with an infinite loop. 
+		Though this point, you can potentially argue that what the hell makes you think to use HashMap  
+			in multi-threaded environment to interviewer :)
+
+================================================================================================================================
+================================================================================================================================
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40yD2D9ac
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40yCo7UVZ
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40yCJbDgV
+
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-hashmap-works-in-java.html#ixzz40yBHJJmm
+  
+================================================================================================================================
+================================================================================================================================
+Equals and hashCode contract in Java
+
+And equals method in Java must follow its contract with hashcode method in Java as stated below.
+1) If two objects are equal by equals() method then there hashcode must be same.
+2) If two objects are not equal by equals() method then there hashcode could be same or different.
+So this was the basic theory about equals method in Java now we are going to discuss the approach on how to override equals() method, 
+	yes I know you all know this stuff :) but I have seen some of equals() code which can be improved by following correct approach. For illustration purpose we will see an example of Person class and discuss How to write equals() method in Java for that class.
+
+Read more: http://javarevisited.blogspot.com/2011/02/how-to-write-equals-method-in-java.html#ixzz40yAvnTSy
+  
+  
