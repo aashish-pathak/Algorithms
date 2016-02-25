@@ -35,9 +35,11 @@ public class MergeTwoSortedArrays {
 		for(int i=l2-1; i>=0; i--) {
 			int elementToShift = arr2[i];
 			int indexInArr1 = Binary.indexToInsert(arr1, elementToShift, 0, l1-1);
-			arr2[i] = arr1[l1-1];
-			shiftArrayFromGivenIndex(indexInArr1);
-			arr1[indexInArr1] = elementToShift;
+			if(indexInArr1 < l1) {
+				arr2[i] = arr1[l1-1];
+				shiftArrayFromGivenIndex(indexInArr1);
+				arr1[indexInArr1] = elementToShift;
+			}
 		}
 	}
 	//this function shifts the array values by 1 position to the right from given index

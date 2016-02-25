@@ -18,9 +18,9 @@ public class PairEqualsToGivenSum {
 		// sort the input array in ascending order
 		in = QuickSort.sort(in, 0, in.length-1);
 		int total = getPairs(in, sum);
-		System.out.println("There are total " + total + " pairs in the given array.");
+		System.out.println("There are total " + total + " pairs in the given array whose sum = " + sum);
 		total = getPairsV1(in, sum, 0);
-		System.out.println("There are total " + total + " pairs in the given array.");
+		System.out.println("There are total " + total + " pairs in the given array whose sum is less than " + sum);
 	}
 	
 	/* Sum exact equal to given sum */

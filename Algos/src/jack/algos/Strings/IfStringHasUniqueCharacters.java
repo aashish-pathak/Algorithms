@@ -17,7 +17,6 @@ public class IfStringHasUniqueCharacters {
 		Scanner in = new Scanner(System.in);
 		String str = in.nextLine();
 		
-		
 		if(hasUniqueCharacters(str))
 			System.out.println(str + " has all unique characters!");
 	}

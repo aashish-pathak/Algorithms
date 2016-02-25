@@ -19,7 +19,7 @@ public class SubarrayWithLeastAvrg {
 		
 		/* iterating over the input array to find least sum and index*/
 		for (int i=k; i<n; i++) {
-			int tempSum = minSum - in[i-k] + in[k];
+			int tempSum = minSum - in[i-k] + in[i];
 			if (minSum > tempSum) {
 				minSum = tempSum;
 				index = i;
