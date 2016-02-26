@@ -14,28 +14,33 @@ public class ConvertArrayIntoZigZag {
 		//flag=true: in[i] < in[i+1]
 		//flag=false: in[i] > in[i+1]
 		boolean flag = true;
+
 		zigzag(in, flag);
+
+		for(int i=0; i<in.length; i++)
+			System.out.print(in[i] + " ");
 	}
-	
+
 	public static void zigzag(int[] in, boolean flag) {
-		int temp;
 		for(int i=0; i<in.length-1; i++) {
 			if(flag) {
 				if(in[i] > in[i+1]) {
-					temp = in[i];
-					in[i] = in[i+1];
-					in[i+1] = temp;
+					swap(in, i, i+1);
 				}
 			} else {
 				if(in[i] < in[i+1]) {
-					temp = in[i];
-					in[i] = in[i+1];
-					in[i+1] = temp;
+					swap(in, i, i+1);
 				}
 			}
 			flag = !flag;
 		}
-		for(int i=0; i<in.length; i++)
-			System.out.print(in[i] + " ");
 	}
+
+	private static void swap(int[] arr, int i, int j) {
+		// TODO Auto-generated method stub
+		arr[i] = arr[i] ^ arr[j];
+		arr[j] = arr[i] ^ arr[j];
+		arr[i] = arr[i] ^ arr[j];
+	}
+
 }
