@@ -34,7 +34,7 @@ public class RotateMatrix {
 				swap(matrix, i, j);
 			}
 		}
-		
+		// And then reverse every row.
 		for (int i = 0; i < M; i++){
 			for (int j = 0; j < N / 2; j++){
 				if (matrix[i][j] == matrix[i][N-1-j])
