@@ -60,6 +60,8 @@ public class FormMinimumNumber {
 		printMinimumNumber("IIDDD");
 		System.out.println("");
 		printMinimumNumber("DDIDDIID");
+		System.out.println("");
+		printMinimumNumber("DDIDDIIDD");
 	}
 
 	public static void intializeOutputArray(){
@@ -70,6 +72,13 @@ public class FormMinimumNumber {
 	
 	public static void printMinimumNumber(String sequence){
 		// Initialize necessary variables
+		
+		// Corner case
+		if (sequence.length() == 0 || sequence.length() >= 9){
+			System.out.println("Invalid sequence!");
+			return;
+		}
+		
 		int positionOfI = 0;
 		int minValueAvailable = 1;
 		intializeOutputArray();
