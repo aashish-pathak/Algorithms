@@ -47,6 +47,7 @@ public class FormMinimumNumber {
 	
 	public static void main(String[] args) {
 		
+		/*
 		printMinimumNumber("D");
 		System.out.println("");
 		printMinimumNumber("I");
@@ -62,9 +63,15 @@ public class FormMinimumNumber {
 		printMinimumNumber("DDIDDIID");
 		System.out.println("");
 		printMinimumNumber("DDIDDIIDD");
+		*/
+		long start = System.nanoTime();
+		printMinimumNumber("IDDDDDDD");
+		long end = System.nanoTime();
+		System.out.println("");
+		System.out.println((end - start));
 	}
 
-	public static void intializeOutputArray(){
+	public static void initializeOutputArray(){
 		for (int i = 0; i < outputArray.length; i++)
 			outputArray[i] = 0;
 		outputArrayIndex = 0;
@@ -81,7 +88,7 @@ public class FormMinimumNumber {
 		
 		int positionOfI = 0;
 		int minValueAvailable = 1;
-		intializeOutputArray();
+		initializeOutputArray();
 		
 		// Base case
 		if (sequence.charAt(0) == 'I'){
